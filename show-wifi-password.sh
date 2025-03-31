@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Show WiFi Password - A simple CLI tool to retrieve WiFi passwords from macOS Keychain
-# Usage: ./show-wifi.sh [options] [SSID]
+# Usage: ./show-wifi-password.sh [options] [SSID]
 
 VERSION="0.1.0"
 
@@ -41,7 +41,6 @@ show_help() {
   echo "  -h, --help     Show this help message"
   echo "  -c, --copy     Copy password to clipboard instead of displaying it"
   echo "  -v, --version  Show version information"
-#  echo "  -l, --list     List all saved WiFi networks"
   echo
   echo "If no SSID is provided, the currently connected network will be used."
 }
@@ -88,19 +87,8 @@ get_password() {
   echo "$password"
 }
 
-# Function to list all saved WiFi networks
-list_networks() {
-  echo -e "${GRAY}Retrieving saved WiFi networks...${RESET}"
-  security find-generic-password -D "AirPort network password" -a "AirPort" -g 2>&1 | \
-    grep "\"ssid\"" | sed -E 's/.*"([^"]+)".*/\1/' | sort | uniq | \
-    while read -r ssid; do
-      echo -e "${GREEN}• ${ssid}${RESET}"
-    done
-}
-
 # Default values
 COPY_TO_CLIPBOARD=false
-SHOW_LIST=false
 SSID=""
 
 # Parse command line options
@@ -118,10 +106,6 @@ while [[ $# -gt 0 ]]; do
       show_version
       exit 0
       ;;
-    # -l|--list)
-    #   SHOW_LIST=true
-    #   shift
-    #   ;;
     -*)
       echo -e "${RED}Unknown option: $1${RESET}" >&2
       show_help
@@ -133,12 +117,6 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
-
-# List networks if requested
-if [[ "$SHOW_LIST" == true ]]; then
-  list_networks
-  exit 0
-fi
 
 # Get SSID if not provided
 if [[ -z "$SSID" ]]; then
