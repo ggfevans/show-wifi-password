@@ -7,6 +7,14 @@ VERSION="0.1.0"
 
 set -e
 
+# Function to display version information
+show_version() {
+  echo "Show WiFi Password v${VERSION}"
+  echo "A simple macOS CLI tool to retrieve WiFi passwords from your Keychain."
+  echo "Copyright (c) 2025 Gareth Evans"
+  echo "Licensed under MIT License"
+}
+
 # Check if the script is running on macOS, if not bail out
 check_platform() {
   if [[ "$(uname)" != "Darwin" ]]; then
@@ -32,7 +40,8 @@ show_help() {
   echo "Options:"
   echo "  -h, --help     Show this help message"
   echo "  -c, --copy     Copy password to clipboard instead of displaying it"
-  echo "  -l, --list     List all saved WiFi networks"
+  echo "  -v, --version  Show version information"
+#  echo "  -l, --list     List all saved WiFi networks"
   echo
   echo "If no SSID is provided, the currently connected network will be used."
 }
@@ -105,10 +114,14 @@ while [[ $# -gt 0 ]]; do
       COPY_TO_CLIPBOARD=true
       shift
       ;;
-    -l|--list)
-      SHOW_LIST=true
-      shift
+    -v|--version)
+      show_version
+      exit 0
       ;;
+    # -l|--list)
+    #   SHOW_LIST=true
+    #   shift
+    #   ;;
     -*)
       echo -e "${RED}Unknown option: $1${RESET}" >&2
       show_help
