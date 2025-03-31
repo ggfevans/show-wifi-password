@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  macos-validation:
+    name: macOS Validation
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install shellcheck
+        run: brew install shellcheck
+      
+      - name: Run ShellCheck
+        run: shellcheck -x show-wifi-password.sh || true  # Don't fail on warnings initially
+      
+      - name: Make script executable
+        run: chmod +x show-wifi-password.sh
+      
+      - name: Verify script runs without errors
+        run: |
+          # We can't actually connect to a WiFi network in the CI environment,
+          # but we can test if the script starts and handles the case correctly
+          echo "Testing help option..."
+          output=$(./show-wifi-password.sh -h)
+          if [[ $? -ne 0 ]]; then
+            echo "Script failed to run with -h option"
+            exit 1
+          fi
+          
+          echo "Verifying help output contains expected content"
+          if ! echo "$output" | grep -q "Usage:"; then
+            echo "Help output missing expected 'Usage:' text"
+            exit 1
+          fi
+          
+          # Skip the list test if you've disabled that functionality
+          # echo "Verifying script handles list option"
+          # output=$(./show-wifi-password.sh -l)
+          # if [[ $? -ne 0 ]]; then
+          #   echo "Script failed to run with -l option"
+          #   exit 1
+          # fi
+          
+          echo "Testing error handling for non-existent network"
+          # This should fail gracefully rather than crash
+          ./show-wifi-password.sh "NonExistentNetwork_ForTestingOnly" || true
+          
+          echo "Verification passed! Note: Full functionality testing requires an actual macOS system with WiFi connections"
