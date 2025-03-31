@@ -15,8 +15,7 @@ This tool provides a simple way to access stored WiFi passwords through macOS Ke
 - 🔑 Securely retrieves passwords from macOS Keychain
 - 🔄 Automatically detects and displays the current WiFi network password
 - 📋 Option to copy password directly to clipboard
-- 🌐 Works with all WiFi interfaces (en0, en1, en2)
-- 🎨 User-friendly terminal output with color-coded messages
+- 🎨 User-friendly terminal output with colour-coded messages
 
 ## Installation
 
