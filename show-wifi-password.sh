@@ -3,6 +3,10 @@
 # Show WiFi Password - A simple CLI tool to retrieve WiFi passwords from macOS Keychain
 # Usage: ./show-wifi.sh [options] [SSID]
 
+VERSION="0.1.0"
+
+set -e
+
 # Check if the script is running on macOS, if not bail out
 check_platform() {
   if [[ "$(uname)" != "Darwin" ]]; then
@@ -12,9 +16,6 @@ check_platform() {
   fi
 }
 check_platform
-
-# Check if the script is run with root privileges
-set -e
 
 # Colours for output
 GREEN="\033[32m"
