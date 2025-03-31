@@ -1,10 +1,22 @@
 # Show WiFi Password
 
-A simple macOS CLI tool to quickly retrieve WiFi passwords from your Keychain.
+[![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)](https://github.com/ggfevans/show-wifi-password)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Shell: Bash](https://img.shields.io/badge/shell-bash-89e051.svg)](https://github.com/ggfevans/show-wifi-password)
 
-## About
+A lightweight macOS command-line utility to easily retrieve WiFi passwords from your Keychain.
 
-I created this tool out of curiosity to see if it was feasible to access stored WiFi passwords programmatically and as a practical exercise to improve my macOS shell scripting skills. The script leverages the macOS `security` command to safely access credentials stored in your Keychain.
+## Overview
+
+This tool provides a simple way to access stored WiFi passwords through macOS Keychain, eliminating the need to navigate through System Preferences. It was developed as a practical exercise in macOS shell scripting and to streamline access to saved network credentials.
+
+## Features
+
+- 🔑 Securely retrieves passwords from macOS Keychain
+- 🔄 Automatically detects and displays the current WiFi network password
+- 📋 Option to copy password directly to clipboard
+- 🌐 Works with all WiFi interfaces (en0, en1, en2)
+- 🎨 User-friendly terminal output with color-coded messages
 
 ## Installation
 
@@ -12,16 +24,19 @@ I created this tool out of curiosity to see if it was feasible to access stored 
 # Clone the repository
 git clone https://github.com/ggfevans/show-wifi-password.git
 
-# Make the script executable
+# Change to project directory
 cd show-wifi-password
+
+# Make the script executable
 chmod +x show-wifi-password.sh
 
-# Optional: create a symlink for easier access
+# Optional: create a symlink for system-wide access
 ln -s "$(pwd)/show-wifi-password.sh" /usr/local/bin/show-wifi-password
 ```
 
 ## Usage
 
+```bash
 # Show password for current WiFi network
 ./show-wifi-password.sh
 
@@ -31,26 +46,31 @@ ln -s "$(pwd)/show-wifi-password.sh" /usr/local/bin/show-wifi-password
 # Copy the current network's password to clipboard
 ./show-wifi-password.sh -c
 
-# Display help
+# Display help information
 ./show-wifi-password.sh -h
 
-## Features
+# Show version information
+./show-wifi-password.sh -v
+```
 
-- Retrieves passwords from macOS Keychain securely
-- Automatically detects current WiFi network
-- Option to copy password to clipboard
-- Works across different WiFi interfaces (en0, en1, en2)
-- User-friendly terminal output with color coding
+## Security Considerations
 
-## Security
+This utility accesses your Keychain in a secure manner using macOS's built-in `security` command:
 
-This tool uses the built-in `security` command to access your Keychain. When you run the script:
-
-1. macOS will prompt for your permission to access the Keychain
-2. No passwords are stored or transmitted anywhere
-3. When using the clipboard option (-c), the password remains in your clipboard until overwritten
+- macOS will prompt for your permission before accessing any stored passwords
+- No passwords are stored or transmitted by this tool
+- When using the clipboard option (`-c`), passwords remain in your clipboard only until overwritten
 
 ## Compatibility
 
-Tested on:
+Tested and verified on:
 - macOS Sonoma (14.x)
+- Should work on recent macOS versions (Monterey, Ventura)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to help improve this project.
