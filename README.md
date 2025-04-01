@@ -9,7 +9,6 @@ A lightweight macOS command-line utility to easily retrieve WiFi passwords from 
 <p align="center">
   <img src="./assets/show-wifi-password-demo.gif" alt="Show WiFi Password Demo" width="750">
   <br>
-  <em>Demonstration of retrieving a WiFi password from Keychain</em>
 </p>
 
 ## Overview
