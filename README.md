@@ -60,6 +60,12 @@ This utility accesses your Keychain in a secure manner using macOS's built-in `s
 - No passwords are stored or transmitted by this tool
 - When using the clipboard option (`-c`), passwords remain in your clipboard only until overwritten
 
+## Limitations
+
+- **No Touch ID Integration**: The script uses the macOS `security` command which does not support Touch ID authentication. You will need to type your administrator password when prompted.
+- **Password Entry Required**: Due to Keychain security requirements, you'll need to manually enter your administrator credentials each time you access a password - this is a security feature of macOS, not a bug.
+- **Administrator Access**: Retrieving passwords from Keychain requires administrator privileges.
+
 ## Compatibility
 
 Tested and verified on:
