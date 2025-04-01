@@ -8,7 +8,7 @@
 # Usage: ./show-wifi-password.sh [options] [SSID]
 #
 # Author: Gareth Evans
-# Version: 0.1.0
+# Version: 1.0.0
 # License: MIT
 
 # Exit on error
