@@ -6,6 +6,12 @@
 
 A lightweight macOS command-line utility to easily retrieve WiFi passwords from your Keychain.
 
+<p align="center">
+  <img src="./assets/show-wifi-password-demo.gif" alt="Show WiFi Password Demo" width="750">
+  <br>
+  <em>Demonstration of retrieving a WiFi password from Keychain</em>
+</p>
+
 ## Overview
 
 This tool provides a simple way to access stored WiFi passwords through macOS Keychain, eliminating the need to navigate through System Preferences. It was developed as a practical exercise in macOS shell scripting and to streamline access to saved network credentials.
