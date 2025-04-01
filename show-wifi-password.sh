@@ -66,13 +66,14 @@ get_password() {
   local ssid="$1"
   local sec_output
   
-  echo -e "${GRAY}Getting password for \"${ssid}\"...${RESET}"
-  echo -e "${GRAY}Keychain prompt incoming...${RESET}"
+  # Send informational messages to stderr so they don't get captured
+  echo -e "${GRAY}Getting password for \"${ssid}\"...${RESET}" >&2
+  echo -e "${GRAY}Keychain prompt incoming...${RESET}" >&2
   
   sec_output=$(security find-generic-password -ga "${ssid}" 2>&1 >/dev/null)
   
   if [[ $? -eq 128 ]]; then
-    echo -e "${YELLOW}User cancelled the operation.${RESET}"
+    echo -e "${YELLOW}User cancelled the operation.${RESET}" >&2
     return 1
   fi
   
@@ -84,6 +85,7 @@ get_password() {
     return 1
   fi
   
+  # Return only the password
   echo "$password"
 }
 
