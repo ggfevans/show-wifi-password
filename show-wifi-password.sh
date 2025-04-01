@@ -10,6 +10,7 @@
 # Author: Gareth Evans
 # Version: 1.0.0
 # License: MIT
+VERSION="1.0.0"
 
 # Exit on error
 set -e
